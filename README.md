@@ -22,18 +22,16 @@ Installing *Steamship* is as easy as cloning the repository and then sourcing
 
   1. Clone this repository somewhere, for example to `$HOME/.local/share/steamship`.
 
-    ```sh title="Terminal"
     $ mkdir -p "$HOME/.local/share"
     $ git clone --depth=1 https://github.com/johnnylam88/steamship.git "$HOME/.local/share/steamship"
-    ```
 
   2. Source *Steamship* in your shell configuration file.
 
-    ```sh title=".kshrc"
+    # Insert this snippet into ~/.bashrc or ~/.kshrc.
+    #
     # Older shells may need to set the Steamship root.
     #STEAMSHIP_ROOT="$HOME/.local/share/steamship"
     source "$HOME/.local/share/steamship/steamship.sh
-    ```
 
 ## Configuration
 
@@ -56,16 +54,14 @@ The file **must** be a valid shell script.
 
 Here is an example configuration file:
 
-```sh title=".steamshiprc"
-# Start with the ASCII theme to avoid using Unicode (default is 'starship')
-steamship theme ascii
+    # Start with the ASCII theme to avoid using Unicode (default is 'starship')
+    steamship theme ascii
 
-# show timestamp (default is 'false')
-STEAMSHIP_TIMESTAMP_SHOW=true
+    # show timestamp (default is 'false')
+    STEAMSHIP_TIMESTAMP_SHOW=true
 
-# always show the username (default is 'needed')
-STEAMSHIP_USER_SHOW=always
-```
+    # always show the username (default is 'needed')
+    STEAMSHIP_USER_SHOW=always
 
 ## Contribute
 
