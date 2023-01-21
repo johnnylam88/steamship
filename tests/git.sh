@@ -49,6 +49,7 @@ TESTS="${TESTS} test1"
 test1() {
 	mkdir -p "${TESTDIR}/a" || return 1
 	cd "${TESTDIR}/a" || return 1
+	export GIT_DIR='nOnExIsTeNt'
 
 	test1_name=${1}
 	test1_with_prefix=$(steamship_git -p)
@@ -65,6 +66,7 @@ test1() {
 		"${test1_without_prefix}" \
 		"${test1_without_prefix_expected}"
 
+	unset GIT_DIR
 	cd ../..
 	rm -fr "${TESTDIR}"
 }

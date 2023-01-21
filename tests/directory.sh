@@ -33,6 +33,7 @@ TESTS="${TESTS} test1"
 test1() {
 	mkdir -p "${TESTDIR}/a/b" || return 1
 	cd "${TESTDIR}/a/b" || return 1
+	export GIT_DIR='nOnExIsTeNt'
 
 	test1_name=${1}
 	test1_with_prefix=$(steamship_directory -p)
@@ -49,6 +50,7 @@ test1() {
 		"${test1_without_prefix}" \
 		"${test1_without_prefix_expected}"
 
+	unset GIT_DIR
 	cd ../../..
 	rm -fr "${TESTDIR}"
 }
@@ -58,6 +60,7 @@ test2() {
 	mkdir -p "${TESTDIR}/a/b" || return 1
 	cd "${TESTDIR}/a/b" || return 1
 	chmod -w .
+	export GIT_DIR='nOnExIsTeNt'
 
 	test2_name=${1}
 	test2_with_prefix=$(steamship_directory -p)
@@ -74,6 +77,7 @@ test2() {
 		"${test2_without_prefix}" \
 		"${test2_without_prefix_expected}"
 
+	unset GIT_DIR
 	cd ../../..
 	rm -fr "${TESTDIR}"
 }
