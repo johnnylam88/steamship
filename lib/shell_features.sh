@@ -21,8 +21,7 @@ steamship_shell_features_init() {
 		STEAMSHIP_PROMPT_COMMAND_SUBST='true'
 	fi
 
-	# shellcheck disable=SC3044
-	if [ -z "${BASH_VERSION}" ] || shopt -q promptvars; then
+	if [ -z "${BASH_VERSION}" ] || eval 'shopt -q promptvars'; then
 		: "do nothing"
 	else
 		# Bash has "promptvars" shell option turned off.
@@ -36,8 +35,7 @@ steamship_shell_features_init() {
 		# command substitution in prompt strings.
 		: "do nothing"
 	fi
-	# shellcheck disable=SC3010
-	if [ -z "${ZSH_VERSION}" ] || [[ -o PROMPT_SUBST ]]; then
+	if [ -z "${ZSH_VERSION}" ] || eval '[[ -o PROMPT_SUBST ]]'; then
 		: "do nothing"
 	else
 		# For if Zsh has "PROMPT_SUBST" option turned off.
