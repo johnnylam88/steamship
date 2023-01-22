@@ -4,21 +4,20 @@
 steamship_init() {
 	# ${STEAMSHIP_ROOT} is the path to the steamship main directory.
 	if [ -z "${STEAMSHIP_ROOT}" ]; then
-		if	[ -n "${ZSH_VERSION}" ] && [[ ! -o FUNCTION_ARGZERO ]]; then
+		if [ -n "${BASH_VERSION}" ]; then
+			# Bash has ${BASH_SOURCE[0]} as the path to the sourced file.
+			eval 'STEAMSHIP_ROOT=${BASH_SOURCE[0]%/*}'
+		elif [ -n "${ZSH_VERSION}" ] && { eval '[[ ! -o FUNCTION_ARGZERO ]]'; }; then
 			# ZSH has ${0} as the path to the sourced file, but only if
 			# the shell option FUNCTION_ARGZERO is toggled off.
 			eval 'STEAMSHIP_ROOT=${0:a:h}'
 		elif [ -n "${KSH_VERSION}" ] && { eval '[[ -n "${.sh.file}" ]]' 2>/dev/null; }; then
 			# Modern KSH has ${.sh.file} as the path to the sourced file.
 			eval 'STEAMSHIP_ROOT=${.sh.file%/*}'
-		else
-			STEAMSHIP_ROOT=$(
-				exec 2>/dev/null;
-				cd -- $(dirname "${0}");
-				[ -n "${PWD}" ] && echo "${PWD}" || /usr/bin/pwd || /bin/pwd || pwd
-			)
 		fi
 	fi
+	# Default path for ${STEAMSHIP_ROOT}.
+	: "${STEAMSHIP_ROOT:="${HOME}/.local/share/steamship"}"
 }
 
 steamship_load_library() {
