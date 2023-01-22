@@ -23,6 +23,8 @@ steamship_shell_features_init() {
 		fi
 	elif [ -n "${KSH_VERSION}" ]; then
 		STEAMSHIP_PROMPT_COMMAND_SUBST='true'
+	elif [ -n "${YASH_VERSION}" ]; then
+		STEAMSHIP_PROMPT_COMMAND_SUBST='true'
 	elif [ -n "${ZSH_VERSION}" ]; then
 		if eval '[[ -o PROMPT_SUBST ]]'; then
 			STEAMSHIP_PROMPT_COMMAND_SUBST='true'
