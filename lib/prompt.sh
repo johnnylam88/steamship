@@ -20,6 +20,7 @@ STEAMSHIP_PROMPT_ORDER_DEFAULT='
 	container
 	tmux
 	line_separator
+	shell
 	exit_code
 	character
 '
