@@ -67,64 +67,108 @@ test2() {
 
 TESTS="${TESTS} test3"
 test3() {
-	YASH_VERSION='1'
+	KSH_VERSION='MIRBSD KSH'
 
 	test3_name=${1}
 	test3_with_prefix=$(steamship_shell -p)
 	test3_without_prefix=$(steamship_shell)
-	test3_with_prefix_expected=" ${STEAMSHIP_WHITE}[yash]${STEAMSHIP_BASE_COLOR} "
-	test3_without_prefix_expected="${STEAMSHIP_WHITE}[yash]${STEAMSHIP_BASE_COLOR} "
+	test3_with_prefix_expected=" ${STEAMSHIP_WHITE}[mksh]${STEAMSHIP_BASE_COLOR} "
+	test3_without_prefix_expected="${STEAMSHIP_WHITE}[mksh]${STEAMSHIP_BASE_COLOR} "
 
 	assert_equal "${test3_name}" \
-		"yash, with prefix" \
+		"mksh, with prefix" \
 		"${test3_with_prefix}" \
 		"${test3_with_prefix_expected}"
 	assert_equal "${test3_name}" \
-		"yash, without prefix" \
+		"mksh, without prefix" \
 		"${test3_without_prefix}" \
 		"${test3_without_prefix_expected}"
 
-	unset YASH_VERSION
+	unset KSH_VERSION
 }
 
 TESTS="${TESTS} test4"
 test4() {
-	ZSH_VERSION='1'
+	KSH_VERSION='PD KSH'
 
 	test4_name=${1}
 	test4_with_prefix=$(steamship_shell -p)
 	test4_without_prefix=$(steamship_shell)
-	test4_with_prefix_expected=" ${STEAMSHIP_WHITE}[zsh]${STEAMSHIP_BASE_COLOR} "
-	test4_without_prefix_expected="${STEAMSHIP_WHITE}[zsh]${STEAMSHIP_BASE_COLOR} "
+	test4_with_prefix_expected=" ${STEAMSHIP_WHITE}[pdksh]${STEAMSHIP_BASE_COLOR} "
+	test4_without_prefix_expected="${STEAMSHIP_WHITE}[pdksh]${STEAMSHIP_BASE_COLOR} "
 
 	assert_equal "${test4_name}" \
-		"zsh, with prefix" \
+		"pdksh, with prefix" \
 		"${test4_with_prefix}" \
 		"${test4_with_prefix_expected}"
 	assert_equal "${test4_name}" \
-		"zsh, without prefix" \
+		"pdksh, without prefix" \
 		"${test4_without_prefix}" \
 		"${test4_without_prefix_expected}"
 
-	unset ZSH_VERSION
+	unset KSH_VERSION
 }
 
 TESTS="${TESTS} test5"
 test5() {
+	YASH_VERSION='1'
+
 	test5_name=${1}
 	test5_with_prefix=$(steamship_shell -p)
 	test5_without_prefix=$(steamship_shell)
-	test5_with_prefix_expected=" ${STEAMSHIP_WHITE}[sh]${STEAMSHIP_BASE_COLOR} "
-	test5_without_prefix_expected="${STEAMSHIP_WHITE}[sh]${STEAMSHIP_BASE_COLOR} "
+	test5_with_prefix_expected=" ${STEAMSHIP_WHITE}[yash]${STEAMSHIP_BASE_COLOR} "
+	test5_without_prefix_expected="${STEAMSHIP_WHITE}[yash]${STEAMSHIP_BASE_COLOR} "
 
 	assert_equal "${test5_name}" \
-		"sh, with prefix" \
+		"yash, with prefix" \
 		"${test5_with_prefix}" \
 		"${test5_with_prefix_expected}"
 	assert_equal "${test5_name}" \
-		"sh, without prefix" \
+		"yash, without prefix" \
 		"${test5_without_prefix}" \
 		"${test5_without_prefix_expected}"
+
+	unset YASH_VERSION
+}
+
+TESTS="${TESTS} test6"
+test6() {
+	ZSH_VERSION='1'
+
+	test6_name=${1}
+	test6_with_prefix=$(steamship_shell -p)
+	test6_without_prefix=$(steamship_shell)
+	test6_with_prefix_expected=" ${STEAMSHIP_WHITE}[zsh]${STEAMSHIP_BASE_COLOR} "
+	test6_without_prefix_expected="${STEAMSHIP_WHITE}[zsh]${STEAMSHIP_BASE_COLOR} "
+
+	assert_equal "${test6_name}" \
+		"zsh, with prefix" \
+		"${test6_with_prefix}" \
+		"${test6_with_prefix_expected}"
+	assert_equal "${test6_name}" \
+		"zsh, without prefix" \
+		"${test6_without_prefix}" \
+		"${test6_without_prefix_expected}"
+
+	unset ZSH_VERSION
+}
+
+TESTS="${TESTS} test7"
+test7() {
+	test7_name=${1}
+	test7_with_prefix=$(steamship_shell -p)
+	test7_without_prefix=$(steamship_shell)
+	test7_with_prefix_expected=" ${STEAMSHIP_WHITE}[sh]${STEAMSHIP_BASE_COLOR} "
+	test7_without_prefix_expected="${STEAMSHIP_WHITE}[sh]${STEAMSHIP_BASE_COLOR} "
+
+	assert_equal "${test7_name}" \
+		"sh, with prefix" \
+		"${test7_with_prefix}" \
+		"${test7_with_prefix_expected}"
+	assert_equal "${test7_name}" \
+		"sh, without prefix" \
+		"${test7_without_prefix}" \
+		"${test7_without_prefix_expected}"
 }
 
 run_tests

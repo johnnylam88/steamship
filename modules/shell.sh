@@ -18,7 +18,14 @@ steamship_shell() {
 	if [ -n "${BASH_VERSION}" ]; then
 		sss_name='bash'
 	elif [ -n "${KSH_VERSION}" ]; then
-		sss_name='ksh'
+		case ${KSH_VERSION} in
+		*"MIRBSD KSH"*)
+			sss_name='mksh' ;;
+		*"PD KSH"*)
+			sss_name='pdksh' ;;
+		*)
+			sss_name='ksh' ;;
+		esac
 	elif [ -n "${YASH_VERSION}" ]; then
 		sss_name='yash'
 	elif [ -n "${ZSH_VERSION}" ]; then
