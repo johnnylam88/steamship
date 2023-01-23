@@ -14,9 +14,12 @@ steamship_line_separator_init() {
 steamship_line_separator_prompt() {
 	[ "${STEAMSHIP_LINE_SEPARATOR_SHOW}" = true ] || return
 
-	# Append a newline to ${STEAMSHIP_PROMPT_PS1}.
-	STEAMSHIP_PROMPT_PS1="${STEAMSHIP_PROMPT_PS1}"'
+	# Save the old ${STEAMSHIP_PROMPT_PS1}, append a newline, and reset
+	# ${STEAMSHIP_PROMPT_PS1}.
+	# shellcheck disable=SC2034
+	STEAMSHIP_PROMPT_PS1_1="${STEAMSHIP_PROMPT_PS1}"'
 '
+	STEAMSHIP_PROMPT_PS1=
 }
 
 STEAMSHIP_MODULES_SOURCED="${STEAMSHIP_MODULES_SOURCED} line_separator"
