@@ -13,7 +13,6 @@ STEAMSHIP_PROMPT_PS2=
 
 # Order of sections shown in the shell prompt.
 STEAMSHIP_PROMPT_ORDER_DEFAULT='
-	timestamp
 	user
 	directory
 	host
@@ -21,6 +20,7 @@ STEAMSHIP_PROMPT_ORDER_DEFAULT='
 	container
 	tmux
 	line_separator
+	timestamp
 	shell
 	exit_code
 	character
