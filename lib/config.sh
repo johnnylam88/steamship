@@ -41,7 +41,7 @@ steamship_config()
 	fi
 
 	# Load configuration file if it's available.
-	if [ -f "${STEAMSHIP_CONFIG}" ]; then
+	if [ -n "${STEAMSHIP_CONFIG}" ] && [ -f "${STEAMSHIP_CONFIG}" ]; then
 		# Ensure that the configuration file isn't recursively sourced.
 		if [ -z "${steamship_config_sourcing}" ]; then
 			steamship_config_sourcing='yes'
