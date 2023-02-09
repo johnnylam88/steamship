@@ -9,6 +9,9 @@ STEAMSHIP_SUFFIX_DEFAULT=
 STEAMSHIP_COLOR_SUCCESS=
 STEAMSHIP_COLOR_FAILURE=
 
+# Default location of user configuration file.
+STEAMSHIP_CONFIG_DEFAULT="${HOME}/.steamshiprc"
+
 STEAMSHIP_LIBS_INIT="${STEAMSHIP_LIBS_INIT} steamship_config_init"
 
 steamship_config_init() {
@@ -29,7 +32,7 @@ steamship_config()
 	# Find configuration file.
 	if [ -z "${STEAMSHIP_CONFIG}" ]; then
 		for ssc_config_file in \
-			"${HOME}/.steamshiprc" \
+			"${STEAMSHIP_CONFIG_DEFAULT}" \
 			"${XDG_CONFIG_HOME:-"${HOME}/.config"}/steamship.sh" \
 			"${XDG_CONFIG_HOME:-"${HOME}/.config"}/steamship/steamship.sh"
 		do
@@ -38,6 +41,9 @@ steamship_config()
 			fi
 		done
 		unset ssc_config_file
+		# Set a default value for ${STEAMSHIP_CONFIG} if no configuration
+		# file is found.
+		: "${STEAMSHIP_CONFIG:=${STEAMSHIP_CONFIG_DEFAULT}}"
 	fi
 
 	# Load configuration file if it's available.
