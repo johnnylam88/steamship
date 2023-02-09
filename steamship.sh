@@ -46,27 +46,6 @@ steamship_load() {
 	unset ssl_lib_file ssl_lib_init_fn
 }
 
-steamship() {
-	case ${1} in
-	refresh)
-		# Rebuild prompt strings after configuration changes.
-		steamship_prompt_refresh
-		;;
-	reset)
-		# Reset to default settings.
-		steamship_modules_reset
-		steamship_config
-		steamship_load_theme "${STEAMSHIP_THEME:-"starship"}"
-		steamship_prompt_refresh
-		;;
-	theme)
-		shift
-		steamship_load_theme "${@}"
-		steamship_prompt_refresh
-		;;
-	esac
-}
-
 steamship_init
 steamship_load
 steamship reset
