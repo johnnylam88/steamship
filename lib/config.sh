@@ -28,16 +28,16 @@ steamship_config()
 {
 	# Find configuration file.
 	if [ -z "${STEAMSHIP_CONFIG}" ]; then
-		for steamship_config in \
+		for ssc_config_file in \
 			"${HOME}/.steamshiprc" \
 			"${XDG_CONFIG_HOME:-"${HOME}/.config"}/steamship.sh" \
 			"${XDG_CONFIG_HOME:-"${HOME}/.config"}/steamship/steamship.sh"
 		do
-			if [ -f "${steamship_config}" ]; then
-				STEAMSHIP_CONFIG=${steamship_config}
+			if [ -f "${ssc_config_file}" ]; then
+				STEAMSHIP_CONFIG=${ssc_config_file}
 			fi
 		done
-		unset steamship_config
+		unset ssc_config_file
 	fi
 
 	# Load configuration file if it's available.
