@@ -20,6 +20,8 @@ steamship_config_init() {
 	STEAMSHIP_COLOR_SUCCESS='GREEN'
 	# shellcheck disable=SC2034
 	STEAMSHIP_COLOR_FAILURE='RED'
+
+	steamship_config_sourcing=
 }
 
 steamship_config()
@@ -40,8 +42,13 @@ steamship_config()
 
 	# Load configuration file if it's available.
 	if [ -f "${STEAMSHIP_CONFIG}" ]; then
-		# shellcheck disable=SC1090
-		. "${STEAMSHIP_CONFIG}"
+		# Ensure that the configuration file isn't recursively sourced.
+		if [ -z "${steamship_config_sourcing}" ]; then
+			steamship_config_sourcing='yes'
+			# shellcheck disable=SC1090
+			. "${STEAMSHIP_CONFIG}"
+			steamship_config_sourcing=
+		fi
 	fi
 }
 
