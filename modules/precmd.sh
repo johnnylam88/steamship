@@ -25,6 +25,7 @@ steamship_precmd_add_hook() {
 		eval set -- ${steamship_precmd_hooks} $(steamship_shquote "${sspah_hook_fn}")
 		steamship_precmd_hooks=$(steamship_save_argv "${@}")
 	fi
+	unset sspah_hook_fn
 }
 
 steamship_precmd_prompt() {
