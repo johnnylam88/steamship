@@ -19,19 +19,28 @@ STEAMSHIP_LINE_SEPARATOR_SHOW='true'
 TESTS="${TESTS} test1"
 test1() {
 	STEAMSHIP_PROMPT_PS1='$ '
+	STEAMSHIP_PROMPT_PS1_1=
 	steamship_line_separator_prompt
 
 	test1_name=${1}
+
 	test1_ps1=${STEAMSHIP_PROMPT_PS1}
-	test1_ps1_expected='$ 
+	test1_ps1_expected=''
+	test1_ps1_1=${STEAMSHIP_PROMPT_PS1_1}
+	test1_ps1_1_expected='$ 
 '
 
 	assert_equal "${test1_name}" \
-		"newline in ps1" \
+		"empty ps1" \
 		"${test1_ps1}" \
 		"${test1_ps1_expected}"
 
-	unset STEAMSHIP_PROMPT_PS1
+	assert_equal "${test1_name}" \
+		"newline in ps1_1" \
+		"${test1_ps1_1}" \
+		"${test1_ps1_1_expected}"
+
+	unset STEAMSHIP_PROMPT_PS1 STEAMSHIP_PROMPT_PS1_1
 }
 
 run_tests
