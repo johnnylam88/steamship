@@ -20,11 +20,10 @@ STEAMSHIP_BASE_COLOR=
 
 steamship_colors_base_color_init() {
 	# Set the value of STEAMSHIP_BASE_COLOR from ${STEAMSHIP_PROMPT_COLOR}.
-	if [ -n "${STEAMSHIP_PROMPT_COLOR}" ]; then
-		sscbci_colorvar="STEAMSHIP_${STEAMSHIP_PROMPT_COLOR}"
-		eval 'STEAMSHIP_BASE_COLOR=${'"${sscbci_colorvar}"'}'
-		unset sscbci_colorvar
-	fi
+	[ -n "${STEAMSHIP_PROMPT_COLOR}" ] || return
+	sscbci_colorvar="STEAMSHIP_${STEAMSHIP_PROMPT_COLOR}"
+	eval 'STEAMSHIP_BASE_COLOR=${'"${sscbci_colorvar}"'}'
+	unset sscbci_colorvar
 }
 
 steamship_colors_init() {

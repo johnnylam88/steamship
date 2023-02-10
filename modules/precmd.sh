@@ -8,14 +8,14 @@ steamship_precmd_init() {
 }
 
 steamship_precmd_run_hooks() {
-	if [ -n "${steamship_precmd_hooks}" ]; then
-		# shellcheck disable=SC2086
-		eval set -- ${steamship_precmd_hooks}
-		for ssprh_hook_fn; do
-			eval "${ssprh_hook_fn}"
-		done
-		unset ssprh_hook_fn
-	fi
+	[ -n "${steamship_precmd_hooks}" ] || return
+
+	# shellcheck disable=SC2086
+	eval set -- ${steamship_precmd_hooks}
+	for ssprh_hook_fn; do
+		eval "${ssprh_hook_fn}"
+	done
+	unset ssprh_hook_fn
 }
 
 steamship_precmd_add_hook() {

@@ -12,30 +12,30 @@ steamship_load_library shell_features
 STEAMSHIP_MODULES_SOURCED=
 
 steamship_load_module() {
-	if [ -n "${STEAMSHIP_ROOT}" ]; then
-		if [ -f "${STEAMSHIP_ROOT}/modules/${1}.sh" ]; then
-			# shellcheck disable=1090
-			. "${STEAMSHIP_ROOT}/modules/${1}.sh"
-		else
-			echo 1>&2 "steamship: \`${1}' module not found."
-			return 1
-		fi
+	[ -n "${STEAMSHIP_ROOT}" ] || return
+
+	if [ -f "${STEAMSHIP_ROOT}/modules/${1}.sh" ]; then
+		# shellcheck disable=1090
+		. "${STEAMSHIP_ROOT}/modules/${1}.sh"
+	else
+		echo 1>&2 "steamship: \`${1}' module not found."
+		return 1
 	fi
 }
 
 STEAMSHIP_LIBS_INIT="${STEAMSHIP_LIBS_INIT} steamship_modules_init"
 
 steamship_modules_init() {
-	STEAMSHIP_MODULES_SOURCED=
+	[ -n "${STEAMSHIP_ROOT}" ] || return
 
 	# Load all modules in the `modules` directory.
-	if [ -n "${STEAMSHIP_ROOT}" ]; then
-		for ssm_module_file in "${STEAMSHIP_ROOT}"/modules/*.sh; do
-			# shellcheck disable=SC1090
-			. "${ssm_module_file}"
-		done
-		unset ssm_module_file
-	fi
+	STEAMSHIP_MODULES_SOURCED=
+	for ssm_module_file in "${STEAMSHIP_ROOT}"/modules/*.sh; do
+		# shellcheck disable=SC1090
+		. "${ssm_module_file}"
+	done
+	unset ssm_module_file
+
 	# ${STEAMSHIP_MODULES_SOURCED} contains the modules in the order they
 	# were sourced.
 }
