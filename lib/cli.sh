@@ -10,14 +10,16 @@ steamship_load_library themes
 
 steamship_cli_usage() {
 	# Print usage description to standard output.
-	echo "Usage: steamship command [command_opts ...]"
+	echo 'Usage: steamship command [command_opts ...]'
 	echo
-	echo "COMMANDS:"
-	echo "    edit"
-	echo "    help"
-	echo "    refresh"
-	echo "    reset"
-	echo "    theme"
+	echo 'COMMANDS:'
+	# shellcheck disable=SC2016
+	echo '    edit     Edit ${STEAMSHIP_CONFIG} using ${EDITOR}.'
+	echo '    help     Print this usage description.'
+	echo '    refresh  Refresh the prompt after changes to its configuration.'
+	echo '    reset    Reset the steamship to its loaded configuration.'
+	echo '    theme <name>'
+	echo '             Load the named theme into the current configuration.'
 }
 
 steamship_cli_edit() {
