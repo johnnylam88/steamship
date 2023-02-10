@@ -13,10 +13,31 @@ steamship_cli_usage() {
 	echo "Usage: steamship command [command_opts ...]"
 	echo
 	echo "COMMANDS:"
+	echo "    edit"
 	echo "    help"
 	echo "    refresh"
 	echo "    reset"
 	echo "    theme"
+}
+
+steamship_cli_edit() {
+	# Edit the user configuration file using ${EDITOR}.
+	if [ -z "${STEAMSHIP_CONFIG}" ]; then
+		# shellcheck disable=SC2016
+		echo 1>&2 'steamship: ${STEAMSHIP_CONFIG} is unset or empty'
+		return 1
+	fi
+	if [ ! -f "${STEAMSHIP_CONFIG}" ]; then
+		echo 1>&2 'steamship: '"${STEAMSHIP_CONFIG}"' is missing'
+		return 2
+	fi
+	if [ -z "${EDITOR}" ]; then
+		# shellcheck disable=SC2016
+		echo 1>&2 'steamship: ${EDITOR} is unset or empty'
+		return 3
+	fi
+	${EDITOR} "${STEAMSHIP_CONFIG}"
+	steamship_cli_reset
 }
 
 steamship_cli_help() {
@@ -78,7 +99,7 @@ steamship() {
 	fi
 
 	case ${sscli_command} in
-	help|refresh|reset|theme)
+	edit|help|refresh|reset|theme)
 		: "valid command"
 		;;
 	*)
